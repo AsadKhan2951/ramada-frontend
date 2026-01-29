@@ -93,7 +93,7 @@ export default function Login() {
                   Select Your Name
                 </Label>
                 <Select value={selectedUser} onValueChange={setSelectedUser}>
-                  <SelectTrigger id="user" className="h-12">
+                  <SelectTrigger id="user" className="h-12 w-full">
                     <SelectValue placeholder={loadingStaff ? "Loading..." : "Choose your name"} />
                   </SelectTrigger>
                   <SelectContent>

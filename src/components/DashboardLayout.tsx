@@ -1,4 +1,4 @@
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useAuth, getLoginUrl } from "@/hooks/useAuth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -19,8 +19,9 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
+
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, Users } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -51,7 +52,6 @@ export default function DashboardLayout({
     return saved ? parseInt(saved, 10) : DEFAULT_WIDTH;
   });
   const { loading, user } = useAuth();
-  const [, setLocation] = useLocation();
 
   useEffect(() => {
     localStorage.setItem(SIDEBAR_WIDTH_KEY, sidebarWidth.toString());
@@ -75,7 +75,7 @@ export default function DashboardLayout({
           </div>
           <Button
             onClick={() => {
-              setLocation("/");
+              window.location.href = getLoginUrl();
             }}
             size="lg"
             className="w-full shadow-lg hover:shadow-xl transition-all"
@@ -121,6 +121,7 @@ function DashboardLayoutContent({
   children,
   setSidebarWidth,
   menuItems,
+  title,
 }: DashboardLayoutContentProps) {
   const { user, logout } = useAuth();
   const [location, setLocation] = useLocation();
@@ -189,11 +190,19 @@ function DashboardLayoutContent({
                   onClick={() => setLocation("/")}
                   className="flex items-center gap-2 min-w-0 hover:opacity-80 transition-opacity"
                 >
+                  <img src="/rad-logo.png" alt="rad.bms" className="h-6 w-6 rounded" />
                   <span className="font-semibold tracking-tight truncate">
-                    Ramada Plaza
+                    rad.bms
                   </span>
                 </button>
-              ) : null}
+              ) : (
+                <button
+                  onClick={() => setLocation("/")}
+                  className="hover:opacity-80 transition-opacity"
+                >
+                  <img src="/rad-logo.png" alt="rad.bms" className="h-6 w-6 rounded" />
+                </button>
+              )}
             </div>
           </SidebarHeader>
 

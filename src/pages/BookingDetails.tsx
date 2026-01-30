@@ -12,7 +12,7 @@ import { Calendar, Loader2, MessageSquare, Activity, DollarSign, CheckCircle2, U
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { format } from "date-fns";
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { EditBookingDialog } from "@/components/EditBookingDialog";
 
 export default function BookingDetails({ params }: { params: { id: string } }) {

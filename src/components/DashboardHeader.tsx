@@ -1,4 +1,4 @@
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, LogOut, Moon, Search, Settings, Sun, User } from "lucide-react";
+import { Bell, LayoutGrid, LogOut, Moon, Search, Settings, Sun, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
@@ -25,12 +25,16 @@ interface StaffSession {
 interface DashboardHeaderProps {
   onSearchClick: () => void;
   onNotificationsClick: () => void;
+  onWidgetsClick?: () => void;
+  showWidgetsButton?: boolean;
   unreadCount?: number;
 }
 
 export function DashboardHeader({
   onSearchClick,
   onNotificationsClick,
+  onWidgetsClick,
+  showWidgetsButton = false,
   unreadCount = 0,
 }: DashboardHeaderProps) {
   const { user, logout } = useAuth();
@@ -126,6 +130,19 @@ export function DashboardHeader({
           >
             <Search className="h-4 w-4" />
           </Button>
+
+          {/* Widgets Button */}
+          {showWidgetsButton && onWidgetsClick && (
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={onWidgetsClick}
+              className="h-8 w-8 md:h-9 md:w-9 relative"
+              title="Customize Widgets"
+            >
+              <LayoutGrid className="h-4 w-4" />
+            </Button>
+          )}
 
           {/* Notifications Button */}
           <Button

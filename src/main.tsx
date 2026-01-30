@@ -6,30 +6,19 @@ import superjson from "superjson";
 import App from "./App";
 import "./index.css";
 
-// Get API URL from environment variable
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const queryClient = new QueryClient();
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      staleTime: 5000,
-    },
-  },
-});
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (!(error instanceof TRPCClientError)) return;
   if (typeof window === "undefined") return;
 
-  const isUnauthorized = 
-    error.message === "You must be logged in to perform this action" ||
-    error.message === "UNAUTHORIZED";
+  const isUnauthorized = error.message === 'UNAUTHORIZED' || error.data?.code === 'UNAUTHORIZED';
 
   if (!isUnauthorized) return;
 
-  // Redirect to login page
-  window.location.href = "/";
+  window.location.href = '/login';
 };
 
 queryClient.getQueryCache().subscribe(event => {
@@ -58,23 +47,6 @@ const trpcClient = trpc.createClient({
           ...(init ?? {}),
           credentials: "include",
         });
-      },
-      headers() {
-        // Get token from localStorage if available
-        const staffSession = localStorage.getItem("staffSession");
-        if (staffSession) {
-          try {
-            const session = JSON.parse(staffSession);
-            if (session.token) {
-              return {
-                Authorization: `Bearer ${session.token}`,
-              };
-            }
-          } catch (e) {
-            // Invalid session, ignore
-          }
-        }
-        return {};
       },
     }),
   ],

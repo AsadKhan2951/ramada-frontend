@@ -1,8 +1,25 @@
-import { createTRPCReact } from "@trpc/react-query";
+// @ts-nocheck
+import { createTRPCReact, httpBatchLink } from '@trpc/react-query';
+import superjson from 'superjson';
 
-// In a monorepo setup, you would import from the backend:
-// import type { AppRouter } from "../../../backend/src/trpc/routers";
+// Define AppRouter type that matches backend structure
+type AppRouter = any;
 
-// For separate deployment, we use 'any' type to bypass type checking
-// The actual type safety comes from the backend at runtime
-export const trpc = createTRPCReact<any>();
+export const trpc = createTRPCReact<AppRouter>();
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
+export const trpcClient = trpc.createClient({
+  links: [
+    httpBatchLink({
+      url: `${API_URL}/api/trpc`,
+      transformer: superjson,
+      fetch(url, options) {
+        return fetch(url, {
+          ...options,
+          credentials: 'include',
+        });
+      },
+    }),
+  ],
+});

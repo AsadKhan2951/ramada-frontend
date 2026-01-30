@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Building2, Lock, User, Loader2 } from "lucide-react";
+import { Lock, User, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Login() {
@@ -24,12 +24,9 @@ export default function Login() {
       setIsLoading(false);
       toast.success(`Welcome, ${data.staff.name}!`);
       
-      // Clear any existing session first, then store new staff session with token
+      // Clear any existing session first, then store new staff session
       localStorage.removeItem("staffSession");
-      localStorage.setItem("staffSession", JSON.stringify({
-        ...data.staff,
-        token: data.token,
-      }));
+      localStorage.setItem("staffSession", JSON.stringify(data.staff));
       
       // Route based on access level
       if (data.staff.accessLevel === "full") {
@@ -71,10 +68,14 @@ export default function Login() {
       <div className="w-full max-w-md">
         {/* Logo and Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-neutral-900 dark:bg-white rounded-2xl mb-4">
-            <Building2 className="w-8 h-8 text-white dark:text-neutral-900" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 overflow-hidden shadow-lg">
+            <img 
+              src="/rad-logo.png" 
+              alt="rad.bms" 
+              className="w-full h-full object-cover"
+            />
           </div>
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">Ramada Plaza</h1>
+          <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">rad.bms</h1>
           <p className="text-neutral-600 dark:text-neutral-400 mt-1">Banquet Management System</p>
         </div>
 
@@ -93,12 +94,12 @@ export default function Login() {
                   Select Your Name
                 </Label>
                 <Select value={selectedUser} onValueChange={setSelectedUser}>
-                  <SelectTrigger id="user" className="h-12 w-full">
+                  <SelectTrigger id="user" className="h-12">
                     <SelectValue placeholder={loadingStaff ? "Loading..." : "Choose your name"} />
                   </SelectTrigger>
                   <SelectContent>
                     {staffMembers?.map((staff: any) => (
-                      <SelectItem key={staff.id} value={staff.id}>
+                      <SelectItem key={staff._id || staff.id} value={(staff._id || staff.id).toString()}>
                         <div className="flex flex-col items-start">
                           <span className="font-medium">{staff.name}</span>
                           <span className="text-xs text-neutral-500">{staff.jobTitle}</span>
@@ -128,7 +129,8 @@ export default function Login() {
               {/* Login Button */}
               <Button
                 type="submit"
-                className="w-full h-12 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100"
+                className="w-full h-12 text-white hover:opacity-90"
+                style={{ backgroundColor: '#FA2B00' }}
                 disabled={isLoading || loadingStaff}
               >
                 {isLoading ? (
@@ -153,7 +155,7 @@ export default function Login() {
 
         {/* Footer */}
         <p className="text-center text-xs text-neutral-500 dark:text-neutral-400 mt-6">
-          © 2026 Ramada Plaza. All rights reserved.
+          © 2026 rad.bms. All rights reserved.
         </p>
       </div>
     </div>

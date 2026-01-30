@@ -17,6 +17,7 @@ import ManageServices from "./pages/ManageServices";
 import ManageUsers from "./pages/ManageUsers";
 import SalesReports from "./pages/SalesReports";
 import AdminReports from "./pages/AdminReports";
+import AllBookings from "./pages/AllBookings";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
       <Route path={"/"} component={Login} />
       <Route path={"/login"} component={Login} />
       <Route path={"/sales"} component={SalesDashboard} />
+      <Route path={"/bookings"} component={AllBookings} />
       <Route path={"/operations"} component={OperationsDashboard} />
       <Route path={"/food"} component={FoodDashboard} />
       <Route path={"/finance"} component={FinanceDashboard} />

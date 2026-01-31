@@ -48,6 +48,22 @@ const trpcClient = trpc.createClient({
           credentials: "include",
         });
       },
+      headers() {
+        if (typeof window === "undefined") return {};
+        const session = localStorage.getItem("staffSession");
+        if (!session) return {};
+        try {
+          const parsed = JSON.parse(session);
+          if (parsed?.token) {
+            return {
+              Authorization: `Bearer ${parsed.token}`,
+            };
+          }
+        } catch {
+          // ignore invalid session
+        }
+        return {};
+      },
     }),
   ],
 });

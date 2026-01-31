@@ -26,7 +26,10 @@ export default function Login() {
       
       // Clear any existing session first, then store new staff session
       localStorage.removeItem("staffSession");
-      localStorage.setItem("staffSession", JSON.stringify(data.staff));
+      localStorage.setItem("staffSession", JSON.stringify({
+        ...data.staff,
+        token: data.token,
+      }));
       
       // Route based on access level
       if (data.staff.accessLevel === "full") {

@@ -131,6 +131,11 @@ function DashboardLayoutContent({
   const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
+  const sidebarOffset = isMobile
+    ? "0px"
+    : isCollapsed
+      ? "var(--sidebar-width-icon)"
+      : "var(--sidebar-width)";
 
   useEffect(() => {
     if (isCollapsed) {
@@ -270,7 +275,7 @@ function DashboardLayoutContent({
         />
       </div>
 
-      <SidebarInset>
+      <SidebarInset style={{ paddingLeft: sidebarOffset }}>
         {isMobile && (
           <div className="flex border-b h-14 items-center justify-between bg-background/95 px-2 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40">
             <div className="flex items-center gap-2">

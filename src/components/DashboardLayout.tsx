@@ -169,8 +169,8 @@ function DashboardLayoutContent({
   }, [isResizing, setSidebarWidth]);
 
   return (
-    <>
-      <div className="relative" ref={sidebarRef}>
+    <div className="flex min-h-svh w-full">
+      <div className="relative shrink-0" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
           className="border-r-0"
@@ -287,6 +287,6 @@ function DashboardLayoutContent({
         )}
         <main className="flex-1 p-4">{children}</main>
       </SidebarInset>
-    </>
+    </div>
   );
 }

@@ -753,33 +753,6 @@ export default function SalesDashboard() {
           isEditing={isEditingWidgets}
         />
 
-        {/* View Toggle and Calendar (if no calendar widget) */}
-        {!widgets.some(w => w.type === "calendarMini") && (
-          <div className="mt-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <div className="flex gap-2">
-                <Button
-                  variant={viewMode === "list" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode("list")}
-                >
-                  <List className="h-4 w-4 mr-2" />
-                  List View
-                </Button>
-                <Button
-                  variant={viewMode === "calendar" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode("calendar")}
-                >
-                  <Calendar className="h-4 w-4 mr-2" />
-                  Calendar View
-                </Button>
-              </div>
-            </div>
-
-            {viewMode === "calendar" && <CalendarView />}
-          </div>
-        )}
       </div>
     </DashboardLayout>
   );

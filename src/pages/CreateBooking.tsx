@@ -287,7 +287,7 @@ export default function CreateBooking() {
     const hallRate = primaryVenue.customRate || primaryHall?.baseRate || "0";
 
     const bookingData = {
-      banquetHallId: parseInt(primaryVenue.hallId),
+      banquetHallId: primaryVenue.hallId,
       eventDate: new Date(eventDate),
       clientName,
       clientEmail: clientEmail || undefined,
@@ -310,9 +310,12 @@ export default function CreateBooking() {
       createBookingMutation.mutate(bookingData, {
         onSuccess: (data) => {
           confirmBookingMutation.mutate({
-            bookingId: data.id,
+            id: data.id,
+            clientCnic,
+            clientNtn: clientNtn || undefined,
+            isTaxFiler,
             tokenAmount,
-            paymentMethod: paymentMethod || undefined,
+            paymentMethod: paymentMethod || "Cash",
           });
         },
       });

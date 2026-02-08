@@ -287,7 +287,7 @@ export default function CreateBooking() {
     const hallRate = primaryVenue.customRate || primaryHall?.baseRate || "0";
 
     const bookingData = {
-      banquetHallId: primaryVenue.hallId,
+      banquetHallId: String(primaryVenue.hallId),
       eventDate: new Date(eventDate),
       clientName,
       clientEmail: clientEmail || undefined,

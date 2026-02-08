@@ -16,7 +16,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { EditBookingDialog } from "@/components/EditBookingDialog";
 
 export default function BookingDetails({ params }: { params: { id: string } }) {
-  const bookingId = parseInt(params.id);
+  const bookingId = params.id;
   const [, setLocation] = useLocation();
   const { user } = useAuth();
   const [newComment, setNewComment] = useState("");
@@ -24,7 +24,7 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [paymentStage, setPaymentStage] = useState(2); // Default to stage 2
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const [selectedAgent, setSelectedAgent] = useState<number | null>(null);
+  const [selectedAgent, setSelectedAgent] = useState<string | null>(null);
 
   const { data: booking, isLoading, refetch } = trpc.bookings.getById.useQuery({ id: bookingId });
   const { data: staffMembers } = trpc.staff.list.useQuery();
@@ -414,7 +414,7 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
                   <select
                     id="salesAgent"
                     value={selectedAgent || ''}
-                    onChange={(e) => setSelectedAgent(e.target.value ? parseInt(e.target.value) : null)}
+                      onChange={(e) => setSelectedAgent(e.target.value || null)}
                     className="w-full mt-1 p-2 border rounded-md bg-background"
                   >
                     <option value="">Select an agent...</option>

@@ -31,14 +31,14 @@ ChartJS.register(
 );
 
 interface Booking {
-  id: number;
+  id: string;
   clientName: string;
   eventDate: Date;
   status: string;
   totalAmount: string;
   paidAmount: string | null;
   createdAt: Date;
-  banquetHallId: number | null;
+  banquetHallId: string | null;
 }
 
 interface SalesChartsProps {

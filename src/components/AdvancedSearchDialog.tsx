@@ -89,7 +89,7 @@ export function AdvancedSearchDialog({
     // Hall filter
     if (
       filters.hallId !== "all" &&
-      booking.banquetHallId !== parseInt(filters.hallId)
+      booking.banquetHallId !== filters.hallId
     ) {
       return false;
     }

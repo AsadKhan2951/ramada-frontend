@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { trpc } from "@/lib/trpc";
-import { Calendar, Loader2, MessageSquare, Activity, DollarSign, CheckCircle2, Users } from "lucide-react";
+import { Calendar, Loader2, MessageSquare, Activity, DollarSign, CheckCircle2, Users, Printer } from "lucide-react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { format } from "date-fns";
@@ -132,6 +132,10 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
     });
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   if (isLoading) {
     return (
       <DashboardLayout title="Loading...">
@@ -172,7 +176,21 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
         { label: "Back to Dashboard", href: "/sales", icon: Calendar },
       ]}
     >
-      <div className="space-y-6 max-w-7xl mx-auto">
+      <div className="print-area space-y-6 max-w-7xl mx-auto">
+        <div className="print-only print-header">
+          <div className="flex items-center gap-3">
+            <img src="/rad-logo.png" alt="rad.bms" className="h-10 w-10 rounded" />
+            <div>
+              <p className="text-lg font-semibold">rad.bms</p>
+              <p className="text-sm text-muted-foreground">Banquet Management System</p>
+            </div>
+          </div>
+          <div className="text-sm text-right">
+            <p className="font-semibold">Booking #{booking.bookingNumber}</p>
+            <p>Created: {format(new Date(booking.createdAt), "PPP")}</p>
+            <p>Status: {booking.status.replace("_", " ").toUpperCase()}</p>
+          </div>
+        </div>
         {/* Booking Overview */}
         <Card>
           <CardHeader>
@@ -182,13 +200,24 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
                 <CardDescription>Created on {format(new Date(booking.createdAt), "PPP")}</CardDescription>
               </div>
               <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setEditDialogOpen(true)}
-                >
-                  Edit Booking
-                </Button>
+                <div className="flex items-center gap-2 no-print">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handlePrint}
+                    className="gap-2"
+                  >
+                    <Printer className="h-4 w-4" />
+                    Print
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setEditDialogOpen(true)}
+                  >
+                    Edit Booking
+                  </Button>
+                </div>
                 <Badge className={statusColors[booking.status]}>
                   {booking.status.replace("_", " ").toUpperCase()}
                 </Badge>
@@ -399,7 +428,7 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
 
         {/* Assign to Sales Agent - Only for admins and full access users */}
         {(user?.role === 'admin' || user?.accessLevel === 'full') && (
-          <Card>
+          <Card className="no-print">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Users className="h-5 w-5" />
@@ -449,7 +478,7 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
           </Card>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 no-print">
           {/* Comments Section */}
           <Card>
             <CardHeader>
@@ -547,7 +576,7 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
 
         {/* Actions */}
         {booking.status === "soft_reservation" && user && (
-          <Card>
+          <Card className="no-print">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5" />
@@ -600,7 +629,7 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
         )}
 
         {booking.status === "confirmed" && user && (
-          <Card>
+          <Card className="no-print">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <DollarSign className="h-5 w-5" />

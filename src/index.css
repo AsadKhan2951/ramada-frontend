@@ -74,3 +74,72 @@
     max-width: 1400px;
   }
 }
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  .print-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+
+  .print-area [data-slot="card"] {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+    background: #ffffff !important;
+  }
+
+  .print-area .bg-muted {
+    background: #f8fafc !important;
+  }
+
+  .print-area .text-muted-foreground {
+    color: #475569 !important;
+  }
+
+  .print-area .text-primary {
+    color: #0f172a !important;
+  }
+
+  .print-area img {
+    max-width: 100%;
+  }
+}

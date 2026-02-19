@@ -63,7 +63,7 @@ export default function Home() {
       <div className="container py-12">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-3 mb-4">
-            <img src="/rad-logo-new.jpeg" alt="rad.bms" className="w-12 h-12 rounded-xl" />
+            <img src="/rad-logo-new.jpeg" alt="rad.bms" className="w-12 h-12 rounded-xl object-contain bg-white p-1 box-border" />
             <h1 className="text-4xl font-bold text-foreground">rad.bms</h1>
           </div>
           <p className="text-xl text-muted-foreground">Banquet Management System</p>

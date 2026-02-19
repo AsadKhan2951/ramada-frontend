@@ -195,7 +195,7 @@ function DashboardLayoutContent({
                   onClick={() => setLocation("/")}
                   className="flex items-center gap-2 min-w-0 hover:opacity-80 transition-opacity"
                 >
-                  <img src="/rad-logo-new.jpeg" alt="rad.bms" className="h-6 w-6 rounded" />
+                  <img src="/rad-logo-new.jpeg" alt="rad.bms" className="h-7 w-7 rounded object-contain bg-white p-0.5 box-border" />
                   <span className="font-semibold tracking-tight truncate">
                     rad.bms
                   </span>
@@ -205,7 +205,7 @@ function DashboardLayoutContent({
                   onClick={() => setLocation("/")}
                   className="hover:opacity-80 transition-opacity"
                 >
-                  <img src="/rad-logo-new.jpeg" alt="rad.bms" className="h-6 w-6 rounded" />
+                  <img src="/rad-logo-new.jpeg" alt="rad.bms" className="h-7 w-7 rounded object-contain bg-white p-0.5 box-border" />
                 </button>
               )}
             </div>
@@ -221,10 +221,10 @@ function DashboardLayoutContent({
                       isActive={isActive}
                       onClick={() => setLocation(item.path)}
                       tooltip={item.label}
-                      className={`h-10 transition-all font-normal`}
+                      className="h-10 transition-all font-medium text-slate-700 hover:text-slate-900 data-[active=true]:text-slate-900 data-[active=true]:bg-slate-100/80 dark:text-slate-200 dark:hover:text-white dark:data-[active=true]:text-white dark:data-[active=true]:bg-slate-800/70"
                     >
                       <item.icon
-                        className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
+                        className={`h-4 w-4 ${isActive ? "text-primary" : "text-slate-500 dark:text-slate-300"}`}
                       />
                       <span>{item.label}</span>
                     </SidebarMenuButton>

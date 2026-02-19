@@ -179,7 +179,7 @@ export default function BookingDetails({ params }: { params: { id: string } }) {
       <div className="print-area space-y-6 max-w-7xl mx-auto">
         <div className="print-only print-header">
           <div className="flex items-center gap-3">
-            <img src="/rad-logo.png" alt="rad.bms" className="h-10 w-10 rounded" />
+            <img src="/rad-logo-new.jpeg" alt="rad.bms" className="h-10 w-10 rounded" />
             <div>
               <p className="text-lg font-semibold">rad.bms</p>
               <p className="text-sm text-muted-foreground">Banquet Management System</p>

@@ -73,7 +73,7 @@ export default function Login() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 overflow-hidden shadow-lg">
             <img 
-              src="/rad-logo.png" 
+              src="/rad-logo-new.jpeg" 
               alt="rad.bms" 
               className="w-full h-full object-cover"
             />

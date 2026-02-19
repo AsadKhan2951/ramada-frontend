@@ -195,7 +195,7 @@ function DashboardLayoutContent({
                   onClick={() => setLocation("/")}
                   className="flex items-center gap-2 min-w-0 hover:opacity-80 transition-opacity"
                 >
-                  <img src="/rad-logo.png" alt="rad.bms" className="h-6 w-6 rounded" />
+                  <img src="/rad-logo-new.jpeg" alt="rad.bms" className="h-6 w-6 rounded" />
                   <span className="font-semibold tracking-tight truncate">
                     rad.bms
                   </span>
@@ -205,7 +205,7 @@ function DashboardLayoutContent({
                   onClick={() => setLocation("/")}
                   className="hover:opacity-80 transition-opacity"
                 >
-                  <img src="/rad-logo.png" alt="rad.bms" className="h-6 w-6 rounded" />
+                  <img src="/rad-logo-new.jpeg" alt="rad.bms" className="h-6 w-6 rounded" />
                 </button>
               )}
             </div>

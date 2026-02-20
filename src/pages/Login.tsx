@@ -71,11 +71,11 @@ export default function Login() {
       <div className="w-full max-w-md">
         {/* Logo and Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-lg mb-4 bg-white shadow-md ring-1 ring-black/5">
+          <div className="inline-flex items-center justify-center mb-4">
             <img 
               src="/rad-logo-new.jpeg" 
               alt="rad.bms" 
-              className="w-full h-full object-contain"
+              className="w-28 h-28 object-contain rounded-lg"
             />
           </div>
           <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">rad.bms</h1>

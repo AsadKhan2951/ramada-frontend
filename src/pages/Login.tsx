@@ -68,14 +68,14 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-950 dark:to-neutral-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md pt-4">
         {/* Logo and Title */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center mb-4">
             <img 
               src="/rad-logo-new.jpeg" 
               alt="rad.bms" 
-              className="w-28 h-28 object-contain rounded-lg"
+              className="w-28 object-contain rounded-lg"
             />
           </div>
           <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">rad.bms</h1>

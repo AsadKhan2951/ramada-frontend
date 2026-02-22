@@ -78,7 +78,7 @@ export default function Login() {
               className="w-28 object-contain rounded-lg"
             />
           </div>
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">rad.bms</h1>
+          {/* <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">rad.bms</h1> */}
           <p className="text-neutral-600 dark:text-neutral-400 mt-1">Banquet Management System</p>
         </div>
 
